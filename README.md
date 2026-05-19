@@ -1,15 +1,16 @@
 # AI Job Application Assistant
 
+[![CI](https://github.com/adriangarciao/AI-Job-Application-Assistant/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/adriangarciao/AI-Job-Application-Assistant/actions/workflows/maven.yml)
 
-![CI](https://github.com/adriangarciao/ai-job-assistant/actions/workflows/maven.yml/badge.svg?branch=main)
+A full-stack Spring Boot application that helps job seekers analyze how well their resume matches a job posting using a weighted skill-matching engine and intelligent text parsing.
 
-A full-stack Spring Boot application that helps job seekers analyze how well their resume matches job postings. Features intelligent parsing, AI-powered feedback, and job metadata extraction.
+**Live demo:** https://adriangarciao-job-assistant.vercel.app
 
 ## Features
 
 - **Resume Management**: Upload and store resumes with skill extraction
 - **Job Application Tracking**: Track job applications with status management
-- **AI-Powered Analysis**: 
+- **Skill Match Analysis**:
   - Skill matching with required and nice-to-have skills
   - Match scoring (0-100 scale)
   - Strengths and weaknesses identification
@@ -17,7 +18,7 @@ A full-stack Spring Boot application that helps job seekers analyze how well the
 - **Job Metadata Extraction**:
   - Automatic location detection from job postings
   - Compensation/salary information extraction
-- **Smart Skill Recognition**: 
+- **Smart Skill Recognition**:
   - Core technical skills detection
   - Context-aware matching (e.g., "golang" vs "go")
 - **RESTful API**: Clean REST endpoints for all operations
@@ -80,18 +81,19 @@ Configure database connection in `src/main/resources/application.properties` if 
 ### Running the Backend
 
 ```powershell
-# Run tests
-.\mvnw.cmd test
-
-# Start the application
+# Windows
 .\mvnw.cmd spring-boot:run
+```
+```bash
+# Mac/Linux
+./mvnw spring-boot:run
 ```
 
 The backend will start on `http://localhost:8080`.
 
 ### Running the Frontend
 
-```powershell
+```bash
 cd frontend
 npm install
 npm run dev
@@ -102,21 +104,31 @@ The frontend will start on `http://localhost:5173`.
 ### Running Tests
 
 ```powershell
-# Run all tests
+# Run all tests (Windows)
 .\mvnw.cmd test
 
-# Run specific test class
+# Run specific test class (Windows)
 .\mvnw.cmd test -Dtest=FakeLLMServiceTest
 
-# Run with coverage
+# Run with coverage (Windows)
 .\mvnw.cmd clean test jacoco:report
+```
+```bash
+# Run all tests (Mac/Linux)
+./mvnw test
+
+# Run specific test class (Mac/Linux)
+./mvnw test -Dtest=FakeLLMServiceTest
+
+# Run with coverage (Mac/Linux)
+./mvnw clean test jacoco:report
 ```
 
 **Test Coverage**: 100 tests, 100% passing
 
 ## API Endpoints
 
-### AI Analysis
+### Analysis
 - `POST /api/ai/analyze` - Analyze resume against job posting
 
 ### Applications
@@ -142,7 +154,7 @@ The frontend will start on `http://localhost:5173`.
 ```
 ai-job-app-assistant/
 ├── src/main/java/adriangarciao/ai_job_app_assistant/
-│   ├── config/           # Security, CORS, AI configuration
+│   ├── config/           # Security, CORS configuration
 │   ├── controller/       # REST controllers
 │   ├── dto/              # Data transfer objects
 │   ├── entity/           # JPA entities
@@ -150,17 +162,17 @@ ai-job-app-assistant/
 │   ├── repository/       # Spring Data repositories
 │   ├── security/         # JWT, authentication
 │   └── service/          # Business logic
-│       └── ai/           # AI analysis services
-│           └── llm/      # LLM abstraction layer
+│       └── ai/           # Analysis services
+│           └── llm/      # Scoring abstraction layer
 ├── src/main/resources/
 │   └── db/migration/     # Flyway SQL migrations
 ├── src/test/             # Unit and integration tests
 └── frontend/             # React frontend application
 ```
 
-## AI Analysis System
+## Skill Matching Engine
 
-The AI analysis system uses a deterministic skill-matching algorithm with:
+The scoring engine uses a deterministic weighted algorithm to compare a resume against a job posting:
 
 - **70% weight**: Skill overlap (required + nice-to-have)
 - **30% weight**: Text content overlap
@@ -174,25 +186,6 @@ The AI analysis system uses a deterministic skill-matching algorithm with:
 3. Calculates match percentage for required and nice-to-have skills
 4. Generates strengths, weaknesses, and suggestions
 5. Extracts job metadata (location, compensation)
-
-## Recent Updates
-
-### v1.1.0 (Nov 2025)
-- ✅ Fixed compensation extraction with 4-strategy approach
-- ✅ Prevented "go" verb from being treated as Golang skill
-- ✅ Added job location and compensation metadata to feedback
-- ✅ Enhanced React UI to display job details
-- ✅ All 100 tests passing
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-CI automatically runs `mvn clean test` on all PRs to `main`.
 
 ## License
 

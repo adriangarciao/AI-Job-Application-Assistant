@@ -32,3 +32,26 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Environment variables ###
+.env.local
+.env.production
+
+### Uploaded files ###
+uploads/
+
+### Frontend ###
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+frontend/.vite/
+
+### macOS ###
+.DS_Store
+
+### JaCoCo coverage reports ###
+target/site/
+
+### Logs ###
+*.log
+logs/
